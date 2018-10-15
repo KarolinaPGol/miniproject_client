@@ -15,7 +15,7 @@ public class client {
 		
 		// Scanner for start game
 		Scanner input = new Scanner(System.in);
-		
+		System.out.println("hello");
 		
 		while(keepRunning) {
 			try{
@@ -24,7 +24,7 @@ public class client {
 				
 				
 				// Create a socket to connect to the server 
-				Socket serverSocket = new Socket("localhost", 2000); // This shouldn't be local host but  the serve machine’s host name or IP address
+				Socket serverSocket = new Socket("localhost", 2000); // This shouldn't be local host but  the serve machineï¿½s host name or IP address
 				System.out.println("Client connected ");
 				
 				// Create an input stream to receive data from the server
