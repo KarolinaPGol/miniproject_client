@@ -66,13 +66,15 @@ public class client {
 								
 								
 					//readin players usernames and their choice of tool
+					String player1_username = fromServer.readUTF();
 					String player2_username = fromServer.readUTF();
 					String player3_username = fromServer.readUTF();
+					int player1_tool = fromServer.readInt();
 					int player2_tool = fromServer.readInt(); //reading which tool players chosen 
 					int player3_tool = fromServer.readInt();
 					
 					System.out.println("You chose: " + toolString(tool));
-					System.out.println(player2_username + "chose: " + toolString(player2_tool) + player3_username + "chose: " + toolString(player3_tool));
+					System.out.println(player1_username + "chose: " + toolString(player1_tool) + player2_username + "chose: " + toolString(player2_tool) + player3_username + "chose: " + toolString(player3_tool));
 					
 					//---------------------------WHO WON---------------------------------------
 					//????????????
