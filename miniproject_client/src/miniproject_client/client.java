@@ -94,9 +94,9 @@ public class client {
 					} else if (result == 6) {
 						System.out.println("Player 1 & player 3 are tie");
 					}
+					
 					int[] tools = {player1_tool, player2_tool, player3_tool};
 					
-					//System.out.println("You chose: " + toolString(tool));
 					
 					for(int i=0; i<players.length; i++){
 						if(players[i] == username)
@@ -104,13 +104,6 @@ public class client {
 						else
 							System.out.println(players[i] + "chose" + toolString(tools[i]));
 					}
-					
-					//System.out.println(player1_username + "chose: " + toolString(player1_tool) + player2_username + "chose: " + toolString(player2_tool) + player3_username + "chose: " + toolString(player3_tool));
-					
-					//---------------------------WHO WON---------------------------------------
-					//????????????
-					//int wonplayer = fromServer.readInt(); // who won			
-					//System.out.println(wonplayer + "won"); or tie
 					
 							
 				}
