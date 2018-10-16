@@ -100,15 +100,6 @@ public class client {
 						System.out.println("Player 1 & player 3 are tie");
 					}
 					
-					int[] tools = {player1_tool, player2_tool, player3_tool};
-					
-					
-					for(int i=0; i<players.length; i++){
-						if(players[i] == username)
-							System.out.println("You chose" + toolString(tool));
-						else
-							System.out.println(players[i] + "chose" + toolString(tools[i]));
-					}
 					
 							
 				}
