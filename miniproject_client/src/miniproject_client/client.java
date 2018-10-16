@@ -65,13 +65,18 @@ public class client {
 					String[] players = {player1_username, player2_username, player3_username};
 					
 					int player1_tool = fromServer.readInt();
-					int player2_tool = fromServer.readInt(); // reading which tool players chosen
+					int player2_tool = fromServer.readInt(); //reading which tool players chosen 
 					int player3_tool = fromServer.readInt();
-
-					System.out.println("You chose: " + toolString(tool));
-					System.out.println(player1_username + "chose: " + toolString(player1_tool) + player2_username
-							+ "chose: " + toolString(player2_tool) + player3_username + "chose: "
-							+ toolString(player3_tool));
+					int[] tools = {player1_tool, player2_tool, player3_tool};
+					
+					//System.out.println("You chose: " + toolString(tool));
+					
+					for(int i=0; i<players.length; i++){
+						if(players[i] == username)
+							System.out.println("You chose" + toolString(tool));
+						else
+							System.out.println(players[i] + "chose" + toolString(tools[i]));
+					}
 
 					// ---------------------------WHO WON---------------------------------------
 
