@@ -67,7 +67,6 @@ public class client {
 					int player1_tool = fromServer.readInt();
 					int player2_tool = fromServer.readInt(); // reading which tool players chosen
 					int player3_tool = fromServer.readInt();
-<<<<<<< HEAD
 
 					System.out.println("You chose: " + toolString(tool));
 					System.out.println(player1_username + "chose: " + toolString(player1_tool) + player2_username
@@ -95,7 +94,6 @@ public class client {
 					} else if (result == 6) {
 						System.out.println("Player 1 & player 3 are tie");
 					}
-=======
 					int[] tools = {player1_tool, player2_tool, player3_tool};
 					
 					//System.out.println("You chose: " + toolString(tool));
@@ -115,7 +113,6 @@ public class client {
 					//System.out.println(wonplayer + "won"); or tie
 					
 							
->>>>>>> 4acf185a5fe05a3df0a42c1afe6f1f93453f3cd7
 				}
 
 				input.close();
