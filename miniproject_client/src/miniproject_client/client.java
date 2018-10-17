@@ -15,7 +15,6 @@ public class client {
 
 		// Scanner for start game
 		Scanner input = new Scanner(System.in);
-		System.out.println("hello");
 
 		while (keepRunning) {
 			try {
@@ -23,9 +22,9 @@ public class client {
 				DataInputStream fromServer = null;
 				
 				// Create a socket to connect to the server
-				Socket serverSocket = new Socket("localhost", 2000); // This shouldn't be local host but the serve
+				Socket serverSocket = new Socket("localhost", 3000); // This shouldn't be local host but the serve
 																		// machine�s host name or IP address
-				System.out.println("Client connected ");
+				//System.out.println("Client connected ");
 
 				// Create an input stream to receive data from the server
 				fromServer = new DataInputStream(serverSocket.getInputStream());
@@ -34,13 +33,15 @@ public class client {
 				toServer = new DataOutputStream(serverSocket.getOutputStream());
 
 				// Enter if you want to start the game
+				System.out.println("Welcome!");
 				System.out.println("Do you want to start a game of rock, paper scissors? Type yes or no: ");
-				String wantToStartGame = input.next();
+				String wantToStartGame = input.nextLine();
 				
 
 				// Send to server 'yes' or 'no'
-				toServer.writeBytes(wantToStartGame);
+				toServer.writeUTF(wantToStartGame);
 				// toServer.flush();
+				System.out.println("Server: " + fromServer.readUTF());
 
 				// If user types yes it continues if no it stops
 				
@@ -54,17 +55,17 @@ public class client {
 					String username = input.next();
 					toServer.writeUTF(username); // sends username to server
 
-					// Pick rock, paper, scissors
-					System.out.print("Pick! Rock = 1, paper = 2 or scissors = 3:");
-					int tool = input.nextByte(); // reads users input 1, 2 or 3
-					toServer.write(tool); // sends which tool player picked
-
-					// readin players usernames and their choice of tool
+					// reading players usernames and their choice of tool
 					String player1_username = fromServer.readUTF();
 					String player2_username = fromServer.readUTF();
 					String player3_username = fromServer.readUTF();
 					String[] players = {player1_username, player2_username, player3_username};
 					
+					// Pick rock, paper, scissors
+					System.out.print("Pick! Rock = 1, paper = 2 or scissors = 3:");
+					int tool = input.nextInt(); // reads users input 1, 2 or 3
+					toServer.writeInt(tool); // sends which tool player picked
+
 					int player1_tool = fromServer.readInt();
 					int player2_tool = fromServer.readInt(); //reading which tool players chosen 
 					int player3_tool = fromServer.readInt();
