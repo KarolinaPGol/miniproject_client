@@ -12,9 +12,12 @@ public class client {
 
 		// If the game runs
 		boolean keepRunning = true;
+		
+		
 
 		// Scanner for start game
 		Scanner input = new Scanner(System.in);
+		System.out.println("hello");
 
 		while (keepRunning) {
 			try {
@@ -22,27 +25,26 @@ public class client {
 				DataInputStream fromServer = null;
 				
 				// Create a socket to connect to the server
-				Socket serverSocket = new Socket("localhost", 3000); // This shouldn't be local host but the serve
-																		// machine�s host name or IP address
-				//System.out.println("Client connected ");
+				Socket socket = new Socket("localhost", 7700); // This shouldn't be local host but the serve
+																		// machineďż˝s host name or IP address
+				System.out.println("Client connected ");
 
 				// Create an input stream to receive data from the server
-				fromServer = new DataInputStream(serverSocket.getInputStream());
+				fromServer = new DataInputStream(socket.getInputStream());
 
 				// Create an output stream to send data to the server
-				toServer = new DataOutputStream(serverSocket.getOutputStream());
-
-				// Enter if you want to start the game
-				System.out.println("Welcome!");
+				toServer = new DataOutputStream(socket.getOutputStream());
+				
+		
+				// Enter if you want to start the game and send to server
 				System.out.println("Do you want to start a game of rock, paper scissors? Type yes or no: ");
 				String wantToStartGame = input.nextLine();
-				
-
-				// Send to server 'yes' or 'no'
 				toServer.writeUTF(wantToStartGame);
-				// toServer.flush();
+				//System.out.println("after sending string to server");
 				System.out.println("Server: " + fromServer.readUTF());
-
+				
+				
+				
 				// If user types yes it continues if no it stops
 				
 				if (wantToStartGame.equalsIgnoreCase("no")) {
@@ -50,36 +52,42 @@ public class client {
 				}
 				// ----------------------------GAME-------------------------------
 				else {
-
+					//System.out.println("Enter no: ");
+					//int no= input.nextInt();
+					//toServer.writeInt(no); // sends username to server
+					//System.out.println(fromServer.readInt());
+					
+					//-----------------USERNAME
 					System.out.println("Enter your username: ");
 					String username = input.next();
 					toServer.writeUTF(username); // sends username to server
-
-					// reading players usernames and their choice of tool
-					String player1_username = fromServer.readUTF();
+					
+					
+					// readin players usernames and their choice of tool
+					
 					String player2_username = fromServer.readUTF();
 					String player3_username = fromServer.readUTF();
-					String[] players = {player1_username, player2_username, player3_username};
 					
+					System.out.println("other player: " + player2_username + " and " + player3_username);
+					//String[] players = {player1_username, player2_username, player3_username};
+					//System.out.println(player1_username + player2_username + player3_username );
+					
+					//-----------------TOOL
 					// Pick rock, paper, scissors
-					System.out.print("Pick! Rock = 1, paper = 2 or scissors = 3:");
+					System.out.print("Pick! Rock = 0, paper = 1 or scissors = 2:");
 					int tool = input.nextInt(); // reads users input 1, 2 or 3
+					System.out.println("client; you chose: " + tool);
 					toServer.writeInt(tool); // sends which tool player picked
-
-					int player1_tool = fromServer.readInt();
+					
 					int player2_tool = fromServer.readInt(); //reading which tool players chosen 
 					int player3_tool = fromServer.readInt();
-					int[] tools = {player1_tool, player2_tool, player3_tool};
 					
-					//System.out.println("You chose: " + toolString(tool));
+					System.out.println("You chose: " + toolString(tool));
+					System.out.println(player2_username + " chose " + toolString(player2_tool));
+					System.out.println(player3_username + " chose " + toolString(player3_tool));
 					
-					for(int i=0; i<players.length; i++){
-						if(players[i] == username)
-							System.out.println("You chose" + toolString(tool));
-						else
-							System.out.println(players[i] + "chose" + toolString(tools[i]));
-					}
-
+			
+					/*
 					// ---------------------------WHO WON---------------------------------------
 
 					// GO HARDCODE OR GO HOME
@@ -103,9 +111,9 @@ public class client {
 					}
 					
 					
-							
+					*/		
 				}
-
+				
 				input.close();
 			} catch (IOException e) {
 
@@ -115,13 +123,13 @@ public class client {
 	}
 
 	static String toolString(int tool) { // changes the int tool to the string
-		if (tool == 1)
+		if (tool == 0)
 			return "Rock";
-		if (tool == 2)
+		if (tool == 1)
 			return "Paper";
-		if (tool == 3)
+		if (tool == 2)
 			return "Scissors";
-		return "Wrong input"; // if nothing from 1,2,3
+		return "Invalid input"; // if nothing from 1,2,3
 	}
 
 }
