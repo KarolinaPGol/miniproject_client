@@ -17,17 +17,16 @@ public class client {
 
 		// Scanner for start game
 		Scanner input = new Scanner(System.in);
-		System.out.println("hello");
 
 		while (keepRunning) {
 			try {
 				DataOutputStream toServer = null;
 				DataInputStream fromServer = null;
+		
 				
 				// Create a socket to connect to the server
-				Socket socket = new Socket("localhost", 7700); // This shouldn't be local host but the serve
-																		// machineďż˝s host name or IP address
-				System.out.println("Client connected ");
+				Socket socket = new Socket("localhost", 1100); // This shouldn't be local host but the serve
+																		// machines host name or IP address
 
 				// Create an input stream to receive data from the server
 				fromServer = new DataInputStream(socket.getInputStream());
@@ -37,6 +36,7 @@ public class client {
 				
 		
 				// Enter if you want to start the game and send to server
+				System.out.println("******* WELCOME *******");
 				System.out.println("Do you want to start a game of rock, paper scissors? Type yes or no: ");
 				String wantToStartGame = input.nextLine();
 				toServer.writeUTF(wantToStartGame);
@@ -68,14 +68,29 @@ public class client {
 					String player2_username = fromServer.readUTF();
 					String player3_username = fromServer.readUTF();
 					
-					System.out.println("other player: " + player2_username + " and " + player3_username);
+					System.out.println("Other players: " + player2_username + " and " + player3_username);
 					//String[] players = {player1_username, player2_username, player3_username};
 					//System.out.println(player1_username + player2_username + player3_username );
 					
 					//-----------------TOOL
 					// Pick rock, paper, scissors
-					System.out.print("Pick! Rock = 0, paper = 1 or scissors = 2:");
+					
+					System.out.println("******* Pick! *******");
+					System.out.print("Rock = 0, paper = 1 or scissors = 2:");
 					int tool = input.nextInt(); // reads users input 1, 2 or 3
+					
+					
+					if (tool != 0 && tool != 1 && tool != 2) {
+						System.out.println("Invalid answer. Please try again! ");
+						System.out.println("**********************************");
+						System.out.println("******* Pick! *******");
+						System.out.print("Rock = 0, paper = 1 or scissors = 2:");
+						tool = input.nextInt();
+						
+					}
+						
+					
+										
 					System.out.println("client; you chose: " + tool);
 					toServer.writeInt(tool); // sends which tool player picked
 					
@@ -113,6 +128,7 @@ public class client {
 					
 					*/		
 				}
+				
 				
 				input.close();
 			} catch (IOException e) {
