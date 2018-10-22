@@ -20,7 +20,6 @@ public class client {
 
 		// Scanner for start game
 		Scanner input = new Scanner(System.in);
-		System.out.println("hello");
 
 		while (keepRunning) {
 			try {
@@ -28,19 +27,32 @@ public class client {
 			
 				DataOutputStream toServer = null;
 				DataInputStream fromServer = null;
+		
 				
 				// Create a socket to connect to the server
+<<<<<<< HEAD
 				Socket socket = new Socket("localhost", 9200); // This shouldn't be local host but the serve
 																		// machine�s host name or IP address
 				System.out.println("Client connected ");
+=======
+				Socket socket = new Socket("localhost", 1100); // This shouldn't be local host but the serve
+																		// machines host name or IP address
+>>>>>>> 3a5a13618dd00aa62d422206fb51c4a61524c9df
 
 				// Create an input stream to receive data from the server
 				fromServer = new DataInputStream(socket.getInputStream());
 
 				// Create an output stream to send data to the server
 				toServer = new DataOutputStream(socket.getOutputStream());
+<<<<<<< HEAD
 		
 				// Enter if you want to start the game and send to server
+=======
+				
+		
+				// Enter if you want to start the game and send to server
+				System.out.println("******* WELCOME *******");
+>>>>>>> 3a5a13618dd00aa62d422206fb51c4a61524c9df
 				System.out.println("Do you want to start a game of rock, paper scissors? Type yes or no: ");
 				String wantToStartGame = input.nextLine();
 				toServer.writeUTF(wantToStartGame);
@@ -72,15 +84,39 @@ public class client {
 					String player2_username = fromServer.readUTF();
 					String player3_username = fromServer.readUTF();
 					
+<<<<<<< HEAD
 					System.out.println("other player: " + player2_username + " and " + player3_username);
+=======
+					System.out.println("Other players: " + player2_username + " and " + player3_username);
+>>>>>>> 3a5a13618dd00aa62d422206fb51c4a61524c9df
 					//String[] players = {player1_username, player2_username, player3_username};
 					//System.out.println(player1_username + player2_username + player3_username );
 					
 					//-----------------TOOL
 					// Pick rock, paper, scissors
+<<<<<<< HEAD
 					do {
 					System.out.print("Pick! Rock = 0, paper = 1 or scissors = 2:");
 					int tool = input.nextInt(); // reads users input 1, 2 or 3
+=======
+					
+					System.out.println("******* Pick! *******");
+					System.out.print("Rock = 0, paper = 1 or scissors = 2:");
+					int tool = input.nextInt(); // reads users input 1, 2 or 3
+					
+					
+					if (tool != 0 && tool != 1 && tool != 2) {
+						System.out.println("Invalid answer. Please try again! ");
+						System.out.println("**********************************");
+						System.out.println("******* Pick! *******");
+						System.out.print("Rock = 0, paper = 1 or scissors = 2:");
+						tool = input.nextInt();
+						
+					}
+						
+					
+										
+>>>>>>> 3a5a13618dd00aa62d422206fb51c4a61524c9df
 					System.out.println("client; you chose: " + tool);
 					toServer.writeInt(tool); // sends which tool player picked
 					
@@ -90,9 +126,15 @@ public class client {
 					System.out.println("You chose: " + toolString(tool));
 					System.out.println(player2_username + " chose " + toolString(player2_tool));
 					System.out.println(player3_username + " chose " + toolString(player3_tool));
+<<<<<<< HEAD
 					
 			
 					
+=======
+					
+			
+					/*
+>>>>>>> 3a5a13618dd00aa62d422206fb51c4a61524c9df
 					// ---------------------------WHO WON---------------------------------------
 
 					// GO HARDCODE OR GO HOME
@@ -115,6 +157,7 @@ public class client {
 						System.out.println(username + " & " + player3_username + " are tied");
 					}
 					
+<<<<<<< HEAD
 					System.out.println("Play again? (y/n)");
 				     playAgain = input.next();
 				     System.out.println("After playagain" + playAgain);
@@ -130,6 +173,13 @@ public class client {
 					System.out.println("Thank you for playing");
 				}
 				
+=======
+					
+					*/		
+				}
+				
+				
+>>>>>>> 3a5a13618dd00aa62d422206fb51c4a61524c9df
 				input.close();
 			} catch (IOException e) {
 				
