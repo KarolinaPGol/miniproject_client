@@ -63,7 +63,7 @@ public class client {
 					toServer.writeUTF(username); // sends username to server
 					
 					
-					// readin players usernames and their choice of tool
+					// reading players usernames and their choice of tool
 					
 					String player2_username = fromServer.readUTF();
 					String player3_username = fromServer.readUTF();
