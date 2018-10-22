@@ -79,7 +79,7 @@ public class client {
 					System.out.print("Rock = 0, paper = 1 or scissors = 2:");
 					int tool = input.nextInt(); // reads users input 1, 2 or 3
 					
-					
+					// If the user doesn't pick 0, 1 or 2
 					if (tool != 0 && tool != 1 && tool != 2) {
 						System.out.println("Invalid answer. Please try again! ");
 						System.out.println("**********************************");
