@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 public class client {
 
+	private static String playAgain;
+	private static boolean playAgainServer;
+
 	public static void main(String[] args) {
 
 		// If the game runs
@@ -17,26 +20,27 @@ public class client {
 
 		// Scanner for start game
 		Scanner input = new Scanner(System.in);
+		System.out.println("hello");
 
 		while (keepRunning) {
 			try {
+				
+			
 				DataOutputStream toServer = null;
 				DataInputStream fromServer = null;
-		
 				
 				// Create a socket to connect to the server
-				Socket socket = new Socket("localhost", 1100); // This shouldn't be local host but the serve
-																		// machines host name or IP address
+				Socket socket = new Socket("localhost", 9200); // This shouldn't be local host but the serve
+																		// machs host name or IP address
+				System.out.println("Client connected ");
 
 				// Create an input stream to receive data from the server
 				fromServer = new DataInputStream(socket.getInputStream());
 
 				// Create an output stream to send data to the server
 				toServer = new DataOutputStream(socket.getOutputStream());
-				
 		
 				// Enter if you want to start the game and send to server
-				System.out.println("******* WELCOME *******");
 				System.out.println("Do you want to start a game of rock, paper scissors? Type yes or no: ");
 				String wantToStartGame = input.nextLine();
 				toServer.writeUTF(wantToStartGame);
@@ -63,34 +67,20 @@ public class client {
 					toServer.writeUTF(username); // sends username to server
 					
 					
-					// reading players usernames and their choice of tool
+					// readin players usernames and their choice of tool
 					
 					String player2_username = fromServer.readUTF();
 					String player3_username = fromServer.readUTF();
 					
-					System.out.println("Other players: " + player2_username + " and " + player3_username);
+					System.out.println("other player: " + player2_username + " and " + player3_username);
 					//String[] players = {player1_username, player2_username, player3_username};
 					//System.out.println(player1_username + player2_username + player3_username );
 					
 					//-----------------TOOL
 					// Pick rock, paper, scissors
-					
-					System.out.println("******* Pick! *******");
-					System.out.print("Rock = 0, paper = 1 or scissors = 2:");
+					do {
+					System.out.print("Pick! Rock = 0, paper = 1 or scissors = 2:");
 					int tool = input.nextInt(); // reads users input 1, 2 or 3
-					
-					// If the user doesn't pick 0, 1 or 2
-					if (tool != 0 && tool != 1 && tool != 2) {
-						System.out.println("Invalid answer. Please try again! ");
-						System.out.println("**********************************");
-						System.out.println("******* Pick! *******");
-						System.out.print("Rock = 0, paper = 1 or scissors = 2:");
-						tool = input.nextInt();
-						
-					}
-						
-					
-										
 					System.out.println("client; you chose: " + tool);
 					toServer.writeInt(tool); // sends which tool player picked
 					
@@ -102,37 +92,35 @@ public class client {
 					System.out.println(player3_username + " chose " + toolString(player3_tool));
 					
 			
-					/*
+					
 					// ---------------------------WHO WON---------------------------------------
 
 					// GO HARDCODE OR GO HOME
 
-					int result = fromServer.readInt(); // who won
+					String result = fromServer.readUTF(); // who won
 
-					if (result == 0) {
-						System.out.println("All players are tie");
-					} else if (result == 1) {
-						System.out.println("Player 1 wins");
-					} else if (result == 2) {
-						System.out.println("Player 2 wins");
-					} else if (result == 3) {
-						System.out.println("Player 3 wins");
-					} else if (result == 4) {
-						System.out.println("Player 2 & player 3 are tie");
-					} else if (result == 5) {
-						System.out.println("Player 1 & player 2 are tie");
-					} else if (result == 6) {
-						System.out.println("Player 1 & player 3 are tie");
-					}
+			
+					System.out.println("Game Result: " + result);
+			
 					
-					
-					*/		
+					System.out.println("Play again? (y/n)");
+				     playAgain = input.next();
+				     System.out.println("After playagain" + playAgain);
+				     toServer.writeUTF((String) playAgain);
+				     
+				     String servermessege = fromServer.readUTF();
+				     System.out.println(servermessege);
+				     
+				     playAgainServer = fromServer.readBoolean();
+				     System.out.println("playAgainServer is " + playAgainServer);
+				     
+				}while(playAgainServer);	
+					System.out.println("Thank you for playing");
 				}
-				
 				
 				input.close();
 			} catch (IOException e) {
-
+				
 			}
 		}
 
