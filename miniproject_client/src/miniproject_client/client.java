@@ -25,8 +25,8 @@
 						DataInputStream fromServer = null;
 						
 						// Create a socket to connect to the server
-						Socket socket = new Socket("localhost", 9900); // This shouldn't be local host but the serve
-																				// machineďż˝s host name or IP address
+						Socket socket = new Socket("localhost", 2100); // This shouldn't be local host but the serve
+																				// machine host name or IP address
 		
 						// Create an input stream to receive data from the server
 						fromServer = new DataInputStream(socket.getInputStream());
@@ -60,7 +60,7 @@
 							toServer.writeUTF(username); // sends username to server
 							System.out.println("Your username is: " + username);
 							System.out.println("Waiting for other players to enter a username...");
-							// readin players usernames and their choice of tool
+							// reading players usernames and their choice of tool
 							
 							String player2_username = fromServer.readUTF();
 							String player3_username = fromServer.readUTF();
@@ -72,9 +72,19 @@
 							//-----------------TOOL
 							// Pick rock, paper, scissors
 							do {
-							System.out.println("");
-							System.out.print("Pick your throw! Rock = 0, paper = 1 or scissors = 2:");
+							System.out.println("*** Pick your throw! ***");
+							System.out.print("Rock = 0, paper = 1 or scissors = 2:");
 							int tool = input.nextInt(); // reads users input 1, 2 or 3
+							
+							if(tool != 0 && tool != 1 && tool != 2) {
+							System.out.println("Invalid answer. Please try again!");
+							System.out.println("**********************************");
+							System.out.println("*** Pick your throw! ***");
+							System.out.print("Rock = 0, paper = 1 or scissors = 2:");
+							tool = input.nextInt();								
+								
+							}
+							
 							System.out.println("You chose: " + toolString(tool));
 							toServer.writeInt(tool); // sends which tool player picked
 							System.out.println("Waiting for other players to pick their throw...");
