@@ -25,7 +25,7 @@
 						DataInputStream fromServer = null;
 						
 						// Create a socket to connect to the server
-						Socket socket = new Socket("192.168.43.3", 9100); // This shouldn't be local host but the serve
+						Socket socket = new Socket("localhost", 9100); // This shouldn't be local host but the serve
 																				// machine host name or IP address
 		
 						// Create an input stream to receive data from the server
