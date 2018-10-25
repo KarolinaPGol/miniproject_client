@@ -25,7 +25,7 @@
 						DataInputStream fromServer = null;
 						
 						// Create a socket to connect to the server
-						Socket socket = new Socket("localhost", 2100); // This shouldn't be local host but the serve
+						Socket socket = new Socket("192.168.43.3", 9100); // This shouldn't be local host but the serve
 																				// machine host name or IP address
 		
 						// Create an input stream to receive data from the server
@@ -49,10 +49,7 @@
 						}
 						// ----------------------------GAME-------------------------------
 						else {
-							//System.out.println("Enter no: ");
-							//int no= input.nextInt();
-							//toServer.writeInt(no); // sends username to server
-							//System.out.println(fromServer.readInt());
+							
 							
 							//-----------------USERNAME
 							System.out.println("Enter your username: ");
@@ -66,8 +63,7 @@
 							String player3_username = fromServer.readUTF();
 							
 							System.out.println("other players: " + player2_username + " and " + player3_username);
-							//String[] players = {player1_username, player2_username, player3_username};
-							//System.out.println(player1_username + player2_username + player3_username );
+							
 							
 							//-----------------TOOL
 							// Pick rock, paper, scissors
@@ -100,7 +96,6 @@
 							
 							// ---------------------------WHO WON---------------------------------------
 		
-							// GO HARDCODE OR GO HOME
 							String result = fromServer.readUTF(); // who won
 	
 							
