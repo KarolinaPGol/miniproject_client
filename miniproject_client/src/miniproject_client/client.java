@@ -43,8 +43,8 @@
 									
 						
 						// If user types yes it continues if no it stops
-						if(wantToStartGame != "yes") {
-							if(wantToStartGame != "no") {
+						if(!wantToStartGame.equalsIgnoreCase("yes")) {
+							if(!wantToStartGame.equalsIgnoreCase("no")) {
 							System.out.println("Invalid answer. Please try again!");
 							System.out.println("**********************************");
 							System.out.println("Do you want to start a game? Type yes or no: ");
