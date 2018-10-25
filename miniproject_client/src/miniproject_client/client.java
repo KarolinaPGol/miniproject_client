@@ -25,7 +25,7 @@
 						DataInputStream fromServer = null;
 						
 						// Create a socket to connect to the server
-						Socket socket = new Socket("localhost", 9100); // This shouldn't be local host but the serve
+						Socket socket = new Socket("localhost", 2100); // This shouldn't be local host but the server
 																				// machine host name or IP address
 		
 						// Create an input stream to receive data from the server
@@ -43,12 +43,21 @@
 									
 						
 						// If user types yes it continues if no it stops
-						
-						if (wantToStartGame.equalsIgnoreCase("no")) {
-							keepRunning = false;
+						if(wantToStartGame != "yes") {
+							if(wantToStartGame != "no") {
+							System.out.println("Invalid answer. Please try again!");
+							System.out.println("**********************************");
+							System.out.println("Do you want to start a game? Type yes or no: ");
+							wantToStartGame = input.nextLine();
+							}	
 						}
+							if (wantToStartGame.equalsIgnoreCase("no")) {
+								keepRunning = false;
+						}
+						
+						
 						// ----------------------------GAME-------------------------------
-						else {
+						if(wantToStartGame.equalsIgnoreCase("yes")) {
 							
 							
 							//-----------------USERNAME
@@ -101,7 +110,7 @@
 							
 							System.out.println("Game Result: " + result);	
 							
-							System.out.println("Do you want to play again? Type y/n");
+							System.out.println("Do you want to play again? Type yes/no");
 						     playAgain = input.next();
 						     toServer.writeUTF((String) playAgain);
 						     
@@ -112,10 +121,9 @@
 						    
 						     
 						}while(playAgainServer == true);	
-							System.out.println("Thank you for playing");
+							System.out.println("Thank you for playing!");
 							System.exit(0);
 						}
-						
 						
 					} catch (IOException e) {
 						
